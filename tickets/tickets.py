@@ -22,7 +22,7 @@ import requests
 from prettytable import PrettyTable
 from colorama import init,Fore
 init()
-requests.packages.urllib3.disable_warnings()
+#requests.packages.urllib3.disable_warnings()
 class TrainCollection:
     header = '车次 车站 时间 历时 商务 一等 二等 软卧 硬卧 硬座 无座'.split()
     def __init__(self,trains,options):
