@@ -22,6 +22,7 @@ import requests
 from prettytable import PrettyTable
 from colorama import init,Fore
 init()
+requests.packages.urllib3.disable_warnings()
 class TrainCollection:
     header = '车次 车站 时间 历时 商务 一等 二等 软卧 硬卧 硬座 无座'.split()
     def __init__(self,trains,options):
@@ -49,8 +50,10 @@ class TrainCollection:
             hard_seat = data_list[29] or '--'
             no_seat = data_list[26] or '--'
             train = [train_num,
-                     '\n'.join([from_station_name,to_station_name]),
-                     '\n'.join([start_time,arrive_time]),
+                     '\n'.join([Fore.GREEN + from_station_name + Fore.RESET,
+                                Fore.LIGHTRED_EX + to_station_name + Fore.RESET]),
+                     '\n'.join([Fore.GREEN + start_time + Fore.RESET,
+                                Fore.LIGHTRED_EX+ arrive_time + Fore.RESET]),
                      run_time.replace(':','小时')+'分',
                      special_seat,
                      first_seat,
@@ -80,7 +83,13 @@ def cli():
     #print (url)
     r = requests.get(url,verify=False)
     options =([key for key,value in arguments.items() if value is True])
-    TrainCollection((r.json()['data']['result']),options).pretty_print()
+    try:
+        TrainCollection((r.json()['data']['result']),options).pretty_print()
+    except:
+        try:
+            print (r.json()['messages'])
+        except:
+            print ('Input Error')
 if __name__ == '__main__':
     cli()
 
