@@ -51,9 +51,9 @@ class TrainCollection:
             no_seat = data_list[26] or '--'
             train = [train_num,
                      '\n'.join([Fore.GREEN + from_station_name + Fore.RESET,
-                                Fore.LIGHTRED_EX + to_station_name + Fore.RESET]),
+                                Fore.RED + to_station_name + Fore.RESET]),
                      '\n'.join([Fore.GREEN + start_time + Fore.RESET,
-                                Fore.LIGHTRED_EX+ arrive_time + Fore.RESET]),
+                                Fore.RED+ arrive_time + Fore.RESET]),
                      run_time.replace(':','小时')+'分',
                      special_seat,
                      first_seat,
