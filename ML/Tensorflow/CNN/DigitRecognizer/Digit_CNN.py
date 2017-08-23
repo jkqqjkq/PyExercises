@@ -15,6 +15,7 @@ X_train = scaler.fit_transform(X_train)
 Y_train = train['label'].astype(np.float32)
 Y_train = Y_train.reshape((-1,1))
 X_test = test
+tf.train.AdamOptimizer()
 Y_train = OneHotEncoder().fit_transform(Y_train).todense()
 X_train[0]
 def weight_variable(shape):
